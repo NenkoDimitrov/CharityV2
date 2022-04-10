@@ -21,10 +21,11 @@ namespace CharityV2.Controllers
         // GET: Employees
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Employees.ToListAsync());
+            var applicationDbContext = _context.Employees.Include(e => e.User);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET:Employees/Details/5
+        // GET: Employees/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,6 +34,7 @@ namespace CharityV2.Controllers
             }
 
             var employee = await _context.Employees
+                .Include(e => e.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (employee == null)
             {
@@ -45,6 +47,7 @@ namespace CharityV2.Controllers
         // GET: Employees/Create
         public IActionResult Create()
         {
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -53,7 +56,7 @@ namespace CharityV2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Surname,Familyname,Phone,Email,Description")] Employee employee)
+        public async Task<IActionResult> Create([Bind("Id,Name,Surname,Familyname,Phone,Email,Description,UserId,Role")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -61,6 +64,7 @@ namespace CharityV2.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", employee.UserId);
             return View(employee);
         }
 
@@ -77,6 +81,7 @@ namespace CharityV2.Controllers
             {
                 return NotFound();
             }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", employee.UserId);
             return View(employee);
         }
 
@@ -85,7 +90,7 @@ namespace CharityV2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Surname,Familyname,Phone,Email,Description")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Surname,Familyname,Phone,Email,Description,UserId,Role")] Employee employee)
         {
             if (id != employee.Id)
             {
@@ -112,6 +117,7 @@ namespace CharityV2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", employee.UserId);
             return View(employee);
         }
 
@@ -124,6 +130,7 @@ namespace CharityV2.Controllers
             }
 
             var employee = await _context.Employees
+                .Include(e => e.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (employee == null)
             {

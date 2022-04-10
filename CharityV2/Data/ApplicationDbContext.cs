@@ -15,5 +15,6 @@ namespace CharityV2.Data
         public DbSet<Activitiy> Activities { get; set; }
         public DbSet<Category> Categories{ get; set; }
         public DbSet<Employee> Employees { get; set; }
+        
     }
 }

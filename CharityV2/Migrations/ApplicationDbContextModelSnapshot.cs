@@ -44,16 +44,13 @@ namespace CharityV2.Migrations
                     b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("EmployeeId1")
+                    b.Property<int?>("EmployeesId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("End")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Photo")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Place")
@@ -66,8 +63,8 @@ namespace CharityV2.Migrations
                     b.Property<DateTime>("Start")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -76,11 +73,33 @@ namespace CharityV2.Migrations
 
                     b.HasIndex("CategoryId1");
 
-                    b.HasIndex("EmployeeId1");
+                    b.HasIndex("EmployeesId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Activities");
+                });
+
+            modelBuilder.Entity("CharityV2.Data.ActivityImages", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("ActivitiyId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ActivityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActivitiyId");
+
+                    b.ToTable("ActivityImages");
                 });
 
             modelBuilder.Entity("CharityV2.Data.Category", b =>
@@ -122,10 +141,18 @@ namespace CharityV2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
                     b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Employees");
                 });
@@ -177,6 +204,9 @@ namespace CharityV2.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -342,9 +372,9 @@ namespace CharityV2.Migrations
                         .WithMany("Activities")
                         .HasForeignKey("CategoryId1");
 
-                    b.HasOne("CharityV2.Data.Employee", "Employee")
+                    b.HasOne("CharityV2.Data.Employee", "Employees")
                         .WithMany("Activities")
-                        .HasForeignKey("EmployeeId1");
+                        .HasForeignKey("EmployeesId");
 
                     b.HasOne("CharityV2.Data.User", "User")
                         .WithMany("Activities")
@@ -352,7 +382,25 @@ namespace CharityV2.Migrations
 
                     b.Navigation("Category");
 
-                    b.Navigation("Employee");
+                    b.Navigation("Employees");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CharityV2.Data.ActivityImages", b =>
+                {
+                    b.HasOne("CharityV2.Data.Activitiy", "Activitiy")
+                        .WithMany("ActivityImages")
+                        .HasForeignKey("ActivitiyId");
+
+                    b.Navigation("Activitiy");
+                });
+
+            modelBuilder.Entity("CharityV2.Data.Employee", b =>
+                {
+                    b.HasOne("CharityV2.Data.User", "User")
+                        .WithMany("Employees")
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
@@ -408,6 +456,11 @@ namespace CharityV2.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("CharityV2.Data.Activitiy", b =>
+                {
+                    b.Navigation("ActivityImages");
+                });
+
             modelBuilder.Entity("CharityV2.Data.Category", b =>
                 {
                     b.Navigation("Activities");
@@ -421,6 +474,8 @@ namespace CharityV2.Migrations
             modelBuilder.Entity("CharityV2.Data.User", b =>
                 {
                     b.Navigation("Activities");
+
+                    b.Navigation("Employees");
                 });
 #pragma warning restore 612, 618
         }

@@ -56,7 +56,7 @@ namespace CharityV2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId,EmployeeId,Name,Description,Place,Start,End,RedistrationTime,Photo,CategoryId,CountInterest,CountParticipants,Status")] Activitiy activitiy)
+        public async Task<IActionResult> Create([Bind("Id,UserId,Name,EmployeeId,Description,Place,Start,End,RedistrationTime,CategoryId,CountInterest,CountParticipants,Status")] Activitiy activitiy)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace CharityV2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,EmployeeId,Name,Description,Place,Start,End,RedistrationTime,Photo,CategoryId,CountInterest,CountParticipants,Status")] Activitiy activitiy)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,Name,EmployeeId,Description,Place,Start,End,RedistrationTime,CategoryId,CountInterest,CountParticipants,Status")] Activitiy activitiy)
         {
             if (id != activitiy.Id)
             {

@@ -172,3 +172,9 @@ D:\VS\CharityV2\CharityV2\obj\Debug\net5.0\Razor\Views\Employees\Delete.cshtml.g
 D:\VS\CharityV2\CharityV2\obj\Debug\net5.0\Razor\Views\Employees\Details.cshtml.g.cs
 D:\VS\CharityV2\CharityV2\obj\Debug\net5.0\Razor\Views\Employees\Edit.cshtml.g.cs
 D:\VS\CharityV2\CharityV2\obj\Debug\net5.0\Razor\Views\Employees\Index.cshtml.g.cs
+D:\VS\CharityV2\CharityV2\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Login.cshtml.g.cs
+D:\VS\CharityV2\CharityV2\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Logout.cshtml.g.cs
+D:\VS\CharityV2\CharityV2\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Register.cshtml.g.cs
+D:\VS\CharityV2\CharityV2\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
+D:\VS\CharityV2\CharityV2\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
+D:\VS\CharityV2\CharityV2\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs

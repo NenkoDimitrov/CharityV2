@@ -8,6 +8,8 @@ namespace CharityV2.Data
 
         public string Name { get; set; }
         public string Familyname { get; set; }
+        public RoleType Role { get; set; }
         public ICollection<Activitiy> Activities { get; set; }
+        public ICollection<Employee> Employees { get; set; }
     }
 }

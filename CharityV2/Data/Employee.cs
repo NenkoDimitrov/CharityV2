@@ -11,6 +11,9 @@ namespace CharityV2.Data
         public char Phone { get; set; }
         public char Email { get; set; }
         public string Description { get; set; }
+        public string UserId { get; set; }
+        public User User { get; set; }
+        public RoleType Role { get; set; }
         public ICollection<Activitiy> Activities { get; set; }
     }
 }
